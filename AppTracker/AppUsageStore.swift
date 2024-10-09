@@ -7,7 +7,6 @@ class AppUsageStore: ObservableObject {
     
     private init() {
         print("AppUsageStore initialized")
-        // addSampleData()
     }
     
     func logAppOpened(appName: String, time: Double) {
@@ -33,14 +32,7 @@ class AppUsageStore: ObservableObject {
         usage.lastOpenTime = nil
         usageData[appName] = usage
         print("Updated usage data for \(appName): \(usage)")
-        
-    }
-    
-    func addSampleData() {
-        let apps = ["Facebook", "Instagram", "Twitter"]
-        for app in apps {
-            usageData[app] = AppUsage(name: app, totalUsageTime: Double.random(in: 600...3600), sessionCount: Int.random(in: 5...20))
-        }
+        objectWillChange.send()
     }
 }
 
